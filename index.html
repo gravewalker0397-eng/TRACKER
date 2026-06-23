@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardians of Earth 2050 — Feedback Form | WEAR 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #00FF44;
+      --gold:  #FFD700;
+      --red:   #FF3333;
+      --bg:    #050505;
+      --card:  #0d0d0d;
+      --border:#1a1a1a;
+      --text:  #ffffff;
+      --muted: #666666;
+      --subtle:#111111;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(180deg, #0a1f0d 0%, #050505 100%);
+      border-bottom: 1px solid #00FF4422;
+      padding: 48px 24px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; bottom:0;
+      background: radial-gradient(ellipse at 50% 0%, #00FF4408 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-eyebrow {
+      color: var(--red);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px; letter-spacing: 5px; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .header-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(22px, 5vw, 40px);
+      font-weight: 700; letter-spacing: 3px;
+      color: var(--text); margin-bottom: 8px; line-height: 1.1;
+    }
+    .header-subtitle {
+      color: var(--green);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; letter-spacing: 5px; font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .header-desc {
+      color: var(--muted); font-size: 13px;
+      max-width: 460px; margin: 0 auto 28px;
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap { max-width: 460px; margin: 0 auto; }
+    .progress-meta { display:flex; justify-content:space-between; margin-bottom:6px; }
+    .progress-label { color:var(--muted); font-size:10px; letter-spacing:2px; }
+    .progress-pct   { color:var(--green); font-size:10px; font-weight:700; letter-spacing:2px; }
+    .progress-track { height:3px; background:#111; border-radius:2px; overflow:hidden; }
+    .progress-fill  {
+      height:100%; width:0%;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      border-radius:2px; transition: width 0.4s ease;
+    }
+
+    /* ── BODY ── */
+    .form-body { max-width:680px; margin:0 auto; padding:32px 20px 80px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* ── SECTION HEAD ── */
+    .section-head { margin-bottom:20px; }
+    .section-title-row { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+    .section-icon  { font-size:20px; }
+    .section-title {
+      font-family:'Rajdhani', sans-serif;
+      font-size:15px; font-weight:700; letter-spacing:2px; color:var(--text);
+    }
+    .section-sub  { color:var(--muted); font-size:12px; margin-left:30px; margin-top:2px; }
+    .section-divider {
+      height:1px;
+      background: linear-gradient(90deg, #00FF4422, transparent);
+      margin-top:14px;
+    }
+
+    /* ── INPUTS ── */
+    .input-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media(max-width:480px){ .input-grid{ grid-template-columns:1fr; } }
+
+    .input-group label {
+      display:block; color:var(--muted);
+      font-size:10px; letter-spacing:2px; margin-bottom:8px; font-weight:500;
+    }
+    .input-group input,
+    .input-group textarea,
+    .input-group select {
+      width:100%; background:var(--subtle);
+      border:1px solid #222; border-radius:8px;
+      padding:11px 14px; color:var(--text);
+      font-size:14px; font-family:'Inter', sans-serif;
+      outline:none; transition:border-color 0.2s;
+    }
+    .input-group input:focus,
+    .input-group textarea:focus { border-color:var(--green); }
+    .input-group textarea { resize:vertical; line-height:1.6; }
+    .char-count { text-align:right; color:#333; font-size:11px; margin-top:6px; }
+
+    /* ── STARS ── */
+    .stars { display:flex; gap:5px; }
+    .star {
+      font-size:26px; cursor:pointer;
+      color:#2a2a2a;
+      transition:color 0.15s, transform 0.15s;
+      user-select:none; line-height:1;
+    }
+    .star.lit { transform:scale(1.15); }
+
+    /* ── HERO CARDS ── */
+    .hero-list  { display:flex; flex-direction:column; gap:10px; }
+    .hero-card  {
+      border-radius:10px; padding:14px 18px;
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      border:1px solid transparent; transition:border-color 0.2s;
+    }
+    .hero-name  { font-family:'Rajdhani', sans-serif; font-weight:700; font-size:13px; letter-spacing:2px; }
+    .hero-power { color:#777; font-size:11px; margin-top:2px; }
+
+    /* ── CATEGORY ROWS ── */
+    .category-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 0; border-bottom:1px solid #111; gap:12px;
+      flex-wrap:wrap;
+    }
+    .category-row:last-child { border-bottom:none; }
+    .category-label { display:flex; align-items:center; gap:8px; font-size:14px; color:#ccc; font-weight:500; }
+    .category-icon  { font-size:18px; }
+
+    /* ── HERO CHIPS ── */
+    .hero-chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .hero-chip  {
+      background:var(--subtle); border:1px solid #333;
+      border-radius:20px; padding:8px 16px;
+      color:#666; font-size:11px;
+      font-family:'Rajdhani', sans-serif; font-weight:700; letter-spacing:1px;
+      cursor:pointer; transition:all 0.2s;
+    }
+
+    /* ── VOTE ── */
+    .vote-grid { display:flex; gap:12px; }
+    @media(max-width:480px){ .vote-grid{ flex-direction:column; } }
+    .vote-btn {
+      flex:1; background:var(--subtle);
+      border:2px solid #222; border-radius:10px;
+      padding:16px 8px; color:#555;
+      font-size:11px; font-family:'Rajdhani', sans-serif;
+      font-weight:700; letter-spacing:1px;
+      cursor:pointer; transition:all 0.2s; text-align:center;
+    }
+    .vote-btn:hover { border-color:#444; color:#888; }
+    .vote-yes   { background:#00FF4422 !important; border-color:#00FF44 !important; color:#00FF44 !important; }
+    .vote-no    { background:#FF444422 !important; border-color:#FF4444 !important; color:#FF4444 !important; }
+    .vote-maybe { background:#FFD70022 !important; border-color:#FFD700 !important; color:#FFD700 !important; }
+
+    /* ── SUBMIT ── */
+    .submit-btn {
+      width:100%;
+      background: linear-gradient(135deg, #00FF44 0%, #00CC44 100%);
+      border:none; border-radius:12px; padding:18px;
+      color:#050505; font-size:15px;
+      font-family:'Rajdhani', sans-serif; font-weight:700; letter-spacing:4px;
+      cursor:pointer; transition:opacity 0.2s, transform 0.2s; text-transform:uppercase;
+    }
+    .submit-btn:hover   { opacity:.9; transform:translateY(-1px); }
+    .submit-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+    .form-footer { text-align:center; color:#333; font-size:11px; margin-top:16px; letter-spacing:1px; }
+
+    /* ── THANK YOU ── */
+    #thankYouPage {
+      display:none; min-height:100vh;
+      align-items:center; justify-content:center;
+      padding:40px 20px; flex-direction:column; text-align:center;
+    }
+    #thankYouPage.active { display:flex; }
+    .ty-globe { font-size:80px; margin-bottom:24px; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+    .ty-title {
+      font-family:'Rajdhani', sans-serif;
+      color:var(--green); font-size:40px; font-weight:700; letter-spacing:5px; margin-bottom:12px;
+    }
+    .ty-desc { color:#888; font-size:15px; line-height:1.7; max-width:440px; margin-bottom:32px; }
+    .ty-quote {
+      background:#0a1a0a; border:1px solid #00FF4433;
+      border-radius:16px; padding:24px 32px; max-width:440px; margin-bottom:32px;
+    }
+    .ty-quote p { color:var(--gold); font-style:italic; font-size:15px; line-height:1.8; }
+    .ty-chips  { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:520px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ FORM PAGE ══════════════ -->
+<div id="formPage">
+
+  <div class="header">
+    <div class="header-eyebrow">RADISSON RED &nbsp;·&nbsp; WEAR 2026 &nbsp;·&nbsp; TEAM RED BULLS</div>
+    <h1 class="header-title">THE GUARDIANS OF EARTH 2050</h1>
+    <div class="header-subtitle">FASHION SHOW &nbsp;·&nbsp; FEEDBACK FORM</div>
+    <p class="header-desc">Rate every element of the show. Your honest feedback helps Team Red Bulls grow.</p>
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">FORM COMPLETION</span>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <form class="form-body" id="mainForm">
+
+    <!-- 1. ATTENDEE DETAILS -->
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title-row">
+          <span class="section-icon">👤</span>
+          <span class="section-title">YOUR DETAILS</span>
+        </div>
+        <div class="section-sub">Optional — helps us understand who's giving feedback</div>
+        <div class="section-divider"></div>
+      </div>
+      <div class="input-grid">
+        <div class="input-group">
+          <label>YOUR NAME</label>
+          <input type="text" name="Name" placeholder="Enter your name">
+        </div>
+        <div class="input-group">
+          <label>DEPARTMENT</label>
+          <input type="text" name="Department" placeholder="e.g. Front Office">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. HERO RATINGS -->
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title-row">
+          <span class="section-icon">🦸</span>
+          <span class="section-title">RATE EACH GUARDIAN</span>
+        </div>
+        <div class="section-sub">How well did each character deliver their performance and concept?</div>
+        <div class="section-divider"></div>
+      </div>
+      <div class="hero-list" id="heroList"></div>
+    </div>
+
+    <!-- 3. SHOW ELEMENTS -->
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title-row">
+          <span class="section-icon">🎭</span>
+          <span class="section-title">RATE SHOW ELEMENTS</span>
+        </div>
+        <div class="section-sub">Score each production element of the fashion show</div>
+        <div class="section-divider"></div>
+      </div>
+      <div id="categoryList"></div>
+    </div>
+
+    <!-- 4. FAVOURITES -->
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title-row">
+          <span class="section-icon">⭐</span>
+          <span class="section-title">YOUR FAVOURITES</span>
+        </div>
+        <div class="section-divider"></div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <div style="color:var(--muted);font-size:11px;letter-spacing:2px;margin-bottom:14px;">
+          WHICH GUARDIAN WAS YOUR FAVOURITE?
+        </div>
+        <div class="hero-chips" id="heroChips"></div>
+        <input type="hidden" name="Favourite Guardian" id="favHeroInput">
+      </div>
+
+      <div class="input-group">
+        <label>WHAT WAS YOUR FAVOURITE MOMENT?</label>
+        <textarea name="Favourite Moment" id="favMomentArea" rows="3"
+          placeholder="e.g. When all 8 heroes activated their powers together in the union finale..."></textarea>
+        <div class="char-count"><span id="momentCount">0</span> characters</div>
+      </div>
+    </div>
+
+    <!-- 5. VOTE -->
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title-row">
+          <span class="section-icon">🗳️</span>
+          <span class="section-title">CAST YOUR VOTE</span>
+        </div>
+        <div class="section-divider"></div>
+      </div>
+      <p style="color:#888;font-size:13px;margin-bottom:20px;line-height:1.7;">
+        Based on everything you experienced tonight — would you vote for
+        <span style="color:#FF3333;font-weight:700;">Team Red Bulls</span>
+        as the best team at WEAR 2026?
+      </p>
+      <div class="vote-grid">
+        <button type="button" class="vote-btn" id="btnYes"   onclick="setVote('yes')">YES — ABSOLUTELY</button>
+        <button type="button" class="vote-btn" id="btnNo"    onclick="setVote('no')">NOT YET</button>
+        <button type="button" class="vote-btn" id="btnMaybe" onclick="setVote('maybe')">CLOSE CALL</button>
+      </div>
+      <input type="hidden" name="Would Vote for Team Red Bulls" id="voteInput">
+    </div>
+
+    <!-- 6. SUGGESTIONS -->
+    <div class="card">
+      <div class="section-head">
+        <div class="section-title-row">
+          <span class="section-icon">💬</span>
+          <span class="section-title">SUGGESTIONS &amp; COMMENTS</span>
+        </div>
+        <div class="section-sub">What could we have done better? What blew you away?</div>
+        <div class="section-divider"></div>
+      </div>
+      <div class="input-group">
+        <textarea name="Suggestions and Comments" id="suggestionsArea" rows="5"
+          placeholder="Share your honest thoughts — every word helps us improve..."></textarea>
+        <div class="char-count"><span id="suggestCount">0</span> characters</div>
+      </div>
+    </div>
+
+    <!-- Hidden FormSubmit controls -->
+    <input type="hidden" name="_subject"  value="🌍 Guardians of Earth 2050 — New Feedback | WEAR 2026">
+    <input type="hidden" name="_captcha"  value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <button type="button" class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+      SUBMIT FEEDBACK
+    </button>
+    <p class="form-footer">RADISSON RED &nbsp;·&nbsp; WEAR 2026 &nbsp;·&nbsp; TEAM RED BULLS</p>
+
+  </form>
+</div>
+
+<!-- ══════════════ THANK YOU PAGE ══════════════ -->
+<div id="thankYouPage">
+  <div class="ty-globe">🌍</div>
+  <h2 class="ty-title">THANK YOU</h2>
+  <p class="ty-desc">
+    Your feedback has been sent to the team. You helped shape the future of
+    <span style="color:#00FF44;">Team Red Bulls</span> at WEAR 2026.
+  </p>
+  <div class="ty-quote">
+    <p>
+      "When Earth needed heroes, we didn't wait for superheroes.<br>
+      <strong style="color:#00FF44;">We became them."</strong>
+    </p>
+  </div>
+  <div class="ty-chips" id="tyChips"></div>
+</div>
+
+<!-- ══════════════ SCRIPT ══════════════ -->
+<script>
+  /* ── DATA ── */
+  const HEROES = [
+    { id:"redcycle",   name:"REDCYCLE",            power:"Turns Waste Into Power",               color:"#00FF44", bg:"#0a1f0d" },
+    { id:"ecoflame",   name:"ECO FLAME",            power:"The Sun Answers To Her",               color:"#FFD700", bg:"#1a1500" },
+    { id:"aquaguard",  name:"AQUAGUARD",            power:"Protector of Every Drop",              color:"#00BFFF", bg:"#00111f" },
+    { id:"forestra",   name:"FORESTRA",             power:"Life Grows Where She Walks",           color:"#00CC44", bg:"#001508" },
+    { id:"windrift",   name:"WINDRIFT",             power:"The Storm Obeys",                      color:"#88CCFF", bg:"#000d1a" },
+    { id:"pollinator", name:"POLLINATOR X",         power:"Guardian of Life's Smallest Heroes",   color:"#FFB300", bg:"#150d00" },
+    { id:"carbon",     name:"CAPTAIN CARBON ZERO",  power:"The Air Fights Back",                  color:"#AACCFF", bg:"#080c14" },
+    { id:"velocity",   name:"VELOCITY GREEN",       power:"The Future Moves Clean",               color:"#44FF88", bg:"#001510" },
+  ];
+
+  const CATEGORIES = [
+    { id:"backdrop", label:"Backdrop Video Quality",   icon:"🎬", color:"#FFD700" },
+    { id:"costume",  label:"Costume & Design",         icon:"👗", color:"#FFD700" },
+    { id:"anchor",   label:"Anchor Performance",       icon:"🎤", color:"#FFD700" },
+    { id:"music",    label:"Music Selection",          icon:"🎵", color:"#FFD700" },
+    { id:"union",    label:"The Union Finale",         icon:"⚡", color:"#FFD700" },
+    { id:"overall",  label:"Overall Show Experience",  icon:"🌍", color:"#00FF44" },
+  ];
+
+  const ratings = {};
+  const TOTAL_RATABLE = HEROES.length + CATEGORIES.length;
+
+  /* ── BUILD HERO LIST ── */
+  const heroListEl = document.getElementById("heroList");
+  HEROES.forEach(hero => {
+    const card = document.createElement("div");
+    card.className = "hero-card";
+    card.style.background    = hero.bg;
+    card.style.borderColor   = hero.color + "22";
+    card.onmouseenter = () => card.style.borderColor = hero.color + "88";
+    card.onmouseleave = () => card.style.borderColor = hero.color + "22";
+
+    const info = document.createElement("div");
+    info.innerHTML = `<div class="hero-name" style="color:${hero.color}">${hero.name}</div>
+                      <div class="hero-power">${hero.power}</div>`;
+
+    const starWrap = document.createElement("div");
+    starWrap.id = "stars_" + hero.id;
+    starWrap.className = "stars";
+
+    const hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.name = "Rating — " + hero.name;
+    hidden.id   = "rating_" + hero.id;
+    hidden.value = "0";
+
+    card.appendChild(info);
+    card.appendChild(starWrap);
+    card.appendChild(hidden);
+    heroListEl.appendChild(card);
+
+    buildStars("stars_" + hero.id, hero.id, hero.color);
+  });
+
+  /* ── BUILD CATEGORY LIST ── */
+  const catListEl = document.getElementById("categoryList");
+  CATEGORIES.forEach(cat => {
+    const row = document.createElement("div");
+    row.className = "category-row";
+
+    const label = document.createElement("div");
+    label.className = "category-label";
+    label.innerHTML = `<span class="category-icon">${cat.icon}</span><span>${cat.label}</span>`;
+
+    const starWrap = document.createElement("div");
+    starWrap.id = "stars_" + cat.id;
+    starWrap.className = "stars";
+
+    const hidden = document.createElement("input");
+    hidden.type  = "hidden";
+    hidden.name  = "Rating — " + cat.label;
+    hidden.id    = "rating_" + cat.id;
+    hidden.value = "0";
+
+    row.appendChild(label);
+    row.appendChild(starWrap);
+    row.appendChild(hidden);
+    catListEl.appendChild(row);
+
+    buildStars("stars_" + cat.id, cat.id, cat.color);
+  });
+
+  /* ── BUILD HERO CHIPS (favourite selector) ── */
+  const chipsEl = document.getElementById("heroChips");
+  const tyChips = document.getElementById("tyChips");
+
+  HEROES.forEach(hero => {
+    /* selector chip */
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "hero-chip";
+    chip.textContent = hero.name;
+    chip.onclick = () => {
+      document.querySelectorAll(".hero-chip").forEach(c => {
+        c.style.background   = "";
+        c.style.borderColor  = "#333";
+        c.style.color        = "#666";
+      });
+      chip.style.background  = hero.color + "22";
+      chip.style.borderColor = hero.color;
+      chip.style.color       = hero.color;
+      document.getElementById("favHeroInput").value = hero.name;
+      updateProgress();
+    };
+    chipsEl.appendChild(chip);
+
+    /* thank-you chip */
+    const tc = document.createElement("span");
+    tc.textContent = hero.name;
+    tc.style.cssText = `background:${hero.color}22;border:1px solid ${hero.color}44;
+      color:${hero.color};border-radius:20px;padding:5px 14px;
+      font-size:10px;font-weight:700;letter-spacing:1px;font-family:'Rajdhani',sans-serif;`;
+    tyChips.appendChild(tc);
+  });
+
+  /* ── STAR BUILDER ── */
+  function buildStars(wrapperId, ratingId, color) {
+    const wrap = document.getElementById(wrapperId);
+    for (let i = 1; i <= 5; i++) {
+      const s = document.createElement("span");
+      s.className = "star";
+      s.textContent = "★";
+      s.dataset.val = i;
+      s.onmouseenter = () => paintStars(wrapperId, i, color);
+      s.onmouseleave = () => {
+        const cur = parseInt(document.getElementById("rating_" + ratingId).value || "0");
+        paintStars(wrapperId, cur, color);
+      };
+      s.onclick = () => {
+        const v = parseInt(s.dataset.val);
+        document.getElementById("rating_" + ratingId).value = v;
+        ratings[ratingId] = v;
+        paintStars(wrapperId, v, color);
+        updateProgress();
+      };
+      wrap.appendChild(s);
+    }
+  }
+
+  function paintStars(wrapperId, count, color) {
+    const stars = document.querySelectorAll("#" + wrapperId + " .star");
+    stars.forEach((s, i) => {
+      s.style.color     = i < count ? color : "#2a2a2a";
+      s.style.transform = i < count ? "scale(1.15)" : "scale(1)";
+    });
+  }
+
+  /* ── VOTE ── */
+  function setVote(val) {
+    document.getElementById("voteInput").value = val;
+    document.getElementById("btnYes").className   = "vote-btn" + (val === "yes"   ? " vote-yes"   : "");
+    document.getElementById("btnNo").className    = "vote-btn" + (val === "no"    ? " vote-no"    : "");
+    document.getElementById("btnMaybe").className = "vote-btn" + (val === "maybe" ? " vote-maybe" : "");
+    updateProgress();
+  }
+
+  /* ── PROGRESS ── */
+  function updateProgress() {
+    const pct = Math.round((Object.keys(ratings).length / TOTAL_RATABLE) * 100);
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressPct").textContent  = pct + "%";
+  }
+
+  /* ── CHAR COUNTERS ── */
+  document.getElementById("favMomentArea").addEventListener("input", function() {
+    document.getElementById("momentCount").textContent = this.value.length;
+  });
+  document.getElementById("suggestionsArea").addEventListener("input", function() {
+    document.getElementById("suggestCount").textContent = this.value.length;
+  });
+
+  /* ── SUBMIT ── */
+  async function handleSubmit() {
+    if (!ratings["overall"]) {
+      alert("Please rate the Overall Show Experience before submitting.");
+      return;
+    }
+
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.textContent = "SENDING...";
+
+    /* collect all form fields */
+    const form   = document.getElementById("mainForm");
+    const fd     = new FormData(form);
+    const payload = {};
+    fd.forEach((v, k) => { payload[k] = v; });
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/shenoymathews@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        document.getElementById("formPage").style.display = "none";
+        const ty = document.getElementById("thankYouPage");
+        ty.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        throw new Error("failed");
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = "SUBMIT FEEDBACK";
+      alert("Something went wrong. Please check your connection and try again.");
+    }
+  }
+</script>
+</body>
+</html>
